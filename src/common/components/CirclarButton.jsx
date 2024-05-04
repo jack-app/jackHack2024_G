@@ -4,7 +4,7 @@ const CirclarButton = (props) => {
   // propsを分割代入
   const { color, icon } = props;
   const circlarButtonStyle = {
-    border: `4px solid ${color}`,
+    border: `5px solid ${color}`,
     backgroundColor: "#FFFFFF",
     height: "70px",
     borderRadius: "50%",

@@ -1,9 +1,14 @@
 html {
   background-image: radial-gradient(
-    circle,
-    blue calc(1000px / 2 - 1px),
-    transparent calc(1000px / 2)
-  );
+      circle at left 5% top 5%,
+      #ffd8d8 calc(200px / 2 - 1px),
+      transparent calc(100px / 2)
+    ),
+    radial-gradient(
+      circle at left 95% top 95%,
+      #ffd8d8 calc(300px / 2 - 1px),
+      transparent calc(100px / 2)
+    );
 }
 
 #root {
