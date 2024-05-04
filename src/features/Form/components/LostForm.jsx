@@ -10,13 +10,10 @@ const LostForm = () => {
       </h1>
       <div class = "columns">
         <div class = "column is-6">
-          {/*後ほど写真フォーム追加*/}
-          <h2>左に表示したい</h2>       
+          {/*後ほど写真フォーム追加*/}    
         </div>
         <div class = "column is-6">
-          <h2>
-            右に表示したい
-          </h2>
+          
         </div>    
       </div>
 
