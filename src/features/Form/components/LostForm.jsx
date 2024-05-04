@@ -10,22 +10,32 @@ const LostForm = () => {
       </h1>
       <div class = "columns">
         <div class = "column is-6">
-          {/*後ほど写真フォーム追加*/}    
+          <div class="file">
+            <label class="file-label">
+              <input class="file-input" type="file" name="photo" />
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">画像を選択</span>
+              </span>
+            </label>
+          </div>    
         </div>
         <div class = "column is-6">
-          <h2>LOST PROPERTY</h2>
+          <h2 class = "info">LOST PROPERTY</h2>
           <div class="field">
             <div class="control">
               <input class="input" type="text"/>
             </div>
           </div>
-          <h2>PLACE</h2>
+          <h2 class = "info">PLACE</h2>
           <div class="field">
             <div class="control">
               <input class="input" type="text"/>
             </div>
           </div>
-          <h2>PIN COLOR</h2>
+          <h2 class = "info">PIN COLOR</h2>
           <div class="field">
             <div class="control">
               <div class="select">
@@ -40,7 +50,7 @@ const LostForm = () => {
               </div>
             </div>
           </div>
-          <h2>DETAIL</h2>
+          <h2 class = "info">DETAIL</h2>
           <div class="field">
             <div class="control">
               <input class="input" type="text"/>

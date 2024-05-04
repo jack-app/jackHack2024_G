@@ -1,4 +1,17 @@
 /* .title1{
     color:#232D90;
     font-family:"Luckiest Guy";
+    text-align: left;
 } */
+    
+    .info{
+        background: linear-gradient(transparent 80%,#232D90 0%);
+        text-align: left;
+        height: 80px;
+        width: 300px;
+    }
+
+    .container{
+        margin-left: 0; 
+        margin-right: 0;
+    }
