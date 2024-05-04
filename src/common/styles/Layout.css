@@ -1,3 +1,11 @@
+html {
+  background-image: radial-gradient(
+    circle,
+    blue calc(1000px / 2 - 1px),
+    transparent calc(1000px / 2)
+  );
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
