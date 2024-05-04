@@ -1,67 +1,63 @@
-import React from 'react'
-import '../styles/LostForm.css'
+import "../styles/LostForm.css";
 
 const LostForm = () => {
   return (
-   <>
-    <div class = "container">
-      <h1 class = "form-title">
-        落とし物追加フォーム
-      </h1>
-      <div class = "columns">
-        <div class = "column is-6">
-          <div class="file">
-            <label class="file-label">
-              <input class="file-input" type="file" name="photo" />
-              <span class="file-cta">
-                <span class="file-icon">
-                  <i class="fas fa-upload"></i>
+    <>
+      <div className="container">
+        <h1 className="form-title">落とし物追加フォーム</h1>
+        <div className="columns">
+          <div className="column is-6">
+            <div className="file">
+              <label className="file-label">
+                <input className="file-input" type="file" name="photo" />
+                <span className="file-cta">
+                  <span className="file-icon">
+                    <i className="fas fa-upload"></i>
+                  </span>
+                  <span className="file-label">画像を選択</span>
                 </span>
-                <span class="file-label">画像を選択</span>
-              </span>
-            </label>
-          </div>    
-        </div>
-        <div class = "column is-6">
-          <h2 class = "info">LOST PROPERTY</h2>
-          <div class="field">
-            <div class="control">
-              <input class="input" type="text"/>
+              </label>
             </div>
           </div>
-          <h2 class = "info">PLACE</h2>
-          <div class="field">
-            <div class="control">
-              <input class="input" type="text"/>
+          <div className="column is-6">
+            <h2 className="info">LOST PROPERTY</h2>
+            <div className="field">
+              <div className="control">
+                <input className="input" type="text" />
+              </div>
             </div>
-          </div>
-          <h2 class = "info">PIN COLOR</h2>
-          <div class="field">
-            <div class="control">
-              <div class="select">
-                <select>
-                  <option>赤</option>
-                  <option>黄</option>
-                  <option>緑</option>
-                  <option>青</option>
-                  <option>桃</option>
-                  <option>紫</option>
-                </select>
+            <h2 className="info">PLACE</h2>
+            <div className="field">
+              <div className="control">
+                <input className="input" type="text" />
+              </div>
+            </div>
+            <h2 className="info">PIN COLOR</h2>
+            <div className="field">
+              <div className="control">
+                <div className="select">
+                  <select>
+                    <option>赤</option>
+                    <option>黄</option>
+                    <option>緑</option>
+                    <option>青</option>
+                    <option>桃</option>
+                    <option>紫</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <h2 className="info">DETAIL</h2>
+            <div className="field">
+              <div className="control">
+                <input className="input" type="text" />
               </div>
             </div>
           </div>
-          <h2 class = "info">DETAIL</h2>
-          <div class="field">
-            <div class="control">
-              <input class="input" type="text"/>
-            </div>
-          </div>
-        </div>    
+        </div>
       </div>
-    </div>
-   
-   </>
-  )
-}
+    </>
+  );
+};
 
-export default LostForm
+export default LostForm;

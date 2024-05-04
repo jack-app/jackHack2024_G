@@ -1,15 +1,15 @@
-.form-title{
-    font-family: "Yusei Magic", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    color:#6C2100;
-    text-align: left;
+.form-title {
+  font-family: "Yusei Magic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #6c2100;
+  text-align: left;
 }
-    
-.info{
-    background: linear-gradient(transparent 80%,#232D90 0%);
-    text-align: left;
-    font-family: "Luckiest Guy", cursive;
-    font-weight: 400;
-    font-style: normal;
+
+.info {
+  background: linear-gradient(transparent 80%, #232d90 0%);
+  text-align: left;
+  font-family: "Luckiest Guy", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
