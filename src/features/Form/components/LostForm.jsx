@@ -5,7 +5,7 @@ const LostForm = () => {
   return (
    <>
     <div class = "container">
-      <h1 class = "title">
+      <h1 class = "form-title">
         落とし物追加フォーム
       </h1>
       <div class = "columns">
