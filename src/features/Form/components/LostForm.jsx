@@ -48,7 +48,6 @@ const LostForm = () => {
           </div>
         </div>    
       </div>
-[{}]
     </div>
    
    </>
