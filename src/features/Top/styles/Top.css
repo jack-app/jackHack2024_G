@@ -1,0 +1,22 @@
+.heading {
+  font-size: 2em;
+  color: #333;
+}
+
+.search-form {
+  width: 80%;
+}
+
+.search-form-container {
+  width: 70vw;
+}
+
+.button-container > * {
+  margin: 1rem;
+}
+
+.fuwatto:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  transition: 0.2s cubic-bezier(0.45, 0, 0.55, 1);
+}
