@@ -78,13 +78,13 @@ try:
         longitude = None
         time = None
         id = generate_id()
-        tag = image_recognition()
+        tags = image_recognition()
         # SQL INSERT文
         insert_query = '''
-        INSERT INTO lost_item (id, lost_item_name, latitude, longitude, time, tag)
+        INSERT INTO lost_item (id, name, latitude, longitude, time, tags)
         VALUES (%s, %s, %s, %s, %s,%s)
         '''
-        data = (id, lost_item_name, latitude, longitude, time, tag)
+        data = (id, lost_item_name, latitude, longitude, time, tags)
         # クエリの実行
         cursor.execute(insert_query, data)
         connection.commit()  # トランザクションのコミット

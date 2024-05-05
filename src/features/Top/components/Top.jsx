@@ -8,20 +8,20 @@ import LostFormModal from "./LostFormModal";
 const tmpItemList = [
   {
     id: 1,
-    lat: 35.15396053659968,
-    lng: 136.96864789075318,
-    picture: "https://thumb.photo-ac.com/8d/8d5e3da73936149af0a9620b1a2b6a5a_t.jpeg",
+    latitude: 35.15396053659968,
+    longitude: 136.96864789075318,
+    picture:
+      "https://thumb.photo-ac.com/8d/8d5e3da73936149af0a9620b1a2b6a5a_t.jpeg",
     name: "財布",
     place: "名大図書館前",
     detail: "犬のストラップがついている",
-    tags: ["赤い","財布","革","四角","古い"],
-
-  }
+    tags: ["赤い", "財布", "革", "四角", "古い"],
+  },
 ];
 
 const Top = () => {
   const [isLostFormOpen, setIsLostFormOpen] = useState(false);
-  const [lostItemList, setLostItemList] = useState([]);
+  const [lostItemList, setLostItemList] = useState(tmpItemList);
   const [keyword, setKeyword] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -51,6 +51,7 @@ const Top = () => {
         item.longitude = Number(item.longitude);
       });
       setLostItemList(responseData);
+      console.log(responseData);
     } catch (error) {
       console.log(error.message);
     }
