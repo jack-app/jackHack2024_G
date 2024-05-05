@@ -42,7 +42,9 @@ const Map = (props) => {
                 <h2 class = "pin-info">~ここに日時が入る~</h2>
                 <h1 class = "pin-text">詳細</h1>
                 <h2 class = "pin-info">{item.detail}</h2>
-                <h2 class = "pin-info">{item.tags}</h2>
+                <h2 class = "pin-info">{item.tags.map((tag) => (
+                  <span>{tag}</span>
+                ))}</h2>
               </div>
             </InfoWindowF>
           </MarkerF>
