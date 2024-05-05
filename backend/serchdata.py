@@ -40,9 +40,11 @@ def search_mysql(keyword):
             df = pd.DataFrame(result, columns=columns)
 
             # photo_pathのBase64エンコーディング
+            # print(df['photo_path'][:100])
             df['photo_path'] = df['photo_path'].apply(lambda x: image_file_to_base64(x if x else None))
-            df['photo_path'] = df['photo_path'][1:].replace("'", "")
-            print(df['photo_path'][:100])
+            # print(df['photo_path'])
+            df['photo_path'] = df['photo_path'].apply(lambda x: str(x)[1:].replace("'", "") if x else None)
+            # print(df['photo_path'])
 
             # DataFrameをJSON形式の文字列に変換
             json_result = df.to_json(orient='records')

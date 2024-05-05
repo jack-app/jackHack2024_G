@@ -4,28 +4,10 @@ import "../styles/Top.css";
 import CirclarButton from "@common/components/CirclarButton";
 import LostFormModal from "./LostFormModal";
 import useSearch from "../hooks/useSearch";
-import useSubmit from "../hooks/useSubmit";
-// import useLostItem from "../hooks/useLostItem";
-
-const tmpItemList = [
-  {
-    id: 1,
-    latitude: 35.15396053659968,
-    longitude: 136.96864789075318,
-    picture:
-      "https://thumb.photo-ac.com/8d/8d5e3da73936149af0a9620b1a2b6a5a_t.jpeg",
-    name: "財布",
-    place: "名大図書館前",
-    detail: "犬のストラップがついている",
-    tags: ["赤い", "財布", "革", "四角", "古い"],
-  },
-];
 
 const Top = () => {
   const [isLostFormOpen, setIsLostFormOpen] = useState(false);
-
   const [keyword, setKeyword] = useState("");
-  const [loading, setLoading] = useState(false);
   const [lostItemList, { fetchData }] = useSearch(keyword);
   useEffect(() => {
     fetchData(keyword);
@@ -63,7 +45,7 @@ const Top = () => {
       </div>
       <div className="columns">
         <div className="column is-10">
-          <Map items={lostItemList} />
+          <Map items={lostItemList} fetchData={() => fetchData(keyword)} />
         </div>
         <div className="column is-2 button-container" style={{ margin: "1em" }}>
           <CirclarButton
@@ -86,8 +68,10 @@ const Top = () => {
 
       <LostFormModal
         open={isLostFormOpen}
-        onClose={() => setIsLostFormOpen(false)}
-        loading={loading}
+        onClose={() => {
+          setIsLostFormOpen(false);
+          fetchData(keyword);
+        }}
       />
     </>
   );

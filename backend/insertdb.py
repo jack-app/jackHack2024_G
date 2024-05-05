@@ -44,6 +44,7 @@ def save_mysql(lost_item_name, latitude, longitude, base64_string, detail, place
             time = generate_time()
             id = generate_id()
             # photo_path  = "/photo-folder/IMG_2275.JPG"  # 画像のパス
+            print(base64_string[:100])
             photo_path = convert_base64_to_image(base64_string, directory="photo-folder")
 
             tags = gpt_tag(base64_string)

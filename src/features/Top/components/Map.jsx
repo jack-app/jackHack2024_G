@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   GoogleMap,
   InfoWindowF,
@@ -21,11 +21,15 @@ const containerStyle = {
 };
 
 const Map = (props) => {
-  const { items } = props;
+  const { items, fetchData } = props;
   const [open, setOpen] = useState(Array(items.length).fill(false));
   const [detailVisible, setDetailVisible] = useState(
     Array(items.length).fill(true)
   );
+  useEffect(() => {
+    setOpen(Array(items.length).fill(false));
+    setDetailVisible(Array(items.length).fill(true));
+  }, [items]);
   const handleOpen = (index) => {
     const newOpen = [...open];
     newOpen[index] = true;
@@ -39,6 +43,11 @@ const Map = (props) => {
   const handleDetailOpen = (index) => {
     const newDetailVisible = [...detailVisible];
     newDetailVisible[index] = !newDetailVisible[index];
+    setDetailVisible(newDetailVisible);
+  };
+  const handleDetailClose = (index) => {
+    const newDetailVisible = [...detailVisible];
+    newDetailVisible[index] = false;
     setDetailVisible(newDetailVisible);
   };
   return (
@@ -58,6 +67,7 @@ const Map = (props) => {
                 {detailVisible[index] && (
                   <InfoWindowF
                     position={{ lat: item.latitude, lng: item.longitude }}
+                    onCloseClick={() => handleDetailClose(index)}
                   >
                     <div>
                       <img
@@ -90,8 +100,11 @@ const Map = (props) => {
             </div>
             <DetailModal
               open={open[index]}
-              onClose={() => handleClose(index)}
-              onSubmit={() => console.log("submit")}
+              onClose={() => {
+                handleClose(index);
+                fetchData();
+              }}
+              // onSubmit={() => fetchData()}
               item={item}
             />
           </>
@@ -102,6 +115,7 @@ const Map = (props) => {
 };
 Map.propTypes = {
   items: propTypes.array.isRequired,
+  fetchData: propTypes.func.isRequired,
 };
 
 export default Map;

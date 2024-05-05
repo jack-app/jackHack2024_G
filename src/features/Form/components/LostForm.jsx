@@ -5,7 +5,7 @@ import dummy_image from "../../../assets/no_image.png";
 import usePosition from "@common/hooks/usePosition";
 
 const LostForm = (props) => {
-  const { loading, onClose } = props;
+  const { onClose, setLoading } = props;
   const [previewImage, setPreviewImage] = useState(dummy_image);
   const [formData, setFormData] = useState({
     name: "",
@@ -34,6 +34,7 @@ const LostForm = (props) => {
   };
 
   const insertData = async (formData) => {
+    setLoading(true);
     try {
       console.log(formData);
       console.log(position);
@@ -61,6 +62,8 @@ const LostForm = (props) => {
     } catch (error) {
       console.log(error.message);
     }
+    setLoading(false);
+    onClose();
   };
   return (
     <>
@@ -155,8 +158,8 @@ const LostForm = (props) => {
 };
 
 LostForm.propTypes = {
-  loading: propTypes.bool.isRequired,
   onClose: propTypes.func.isRequired,
+  setLoading: propTypes.func.isRequired,
 };
 
 export default LostForm;

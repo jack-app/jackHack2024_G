@@ -1,7 +1,7 @@
 import propTypes from "prop-types";
 
 const DetailModal = (props) => {
-  const { open, onClose, onSubmit, item } = props;
+  const { open, onClose, item } = props;
 
   const deleteData = async (id) => {
     try {
@@ -26,9 +26,9 @@ const DetailModal = (props) => {
     }
   };
 
-  const handleCollect = (id) => {
+  const handleCollect = async (id) => {
     if (confirm("本当に回収しましたか？")) {
-      deleteData(id);
+      await deleteData(id);
       onClose();
     }
   };
@@ -84,7 +84,6 @@ const DetailModal = (props) => {
 DetailModal.propTypes = {
   open: propTypes.bool.isRequired,
   onClose: propTypes.func.isRequired,
-  onSubmit: propTypes.func.isRequired,
   item: propTypes.object.isRequired,
 };
 
