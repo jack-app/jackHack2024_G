@@ -1,15 +1,58 @@
+import { useState } from "react";
+import propTypes from "prop-types";
 import "../styles/LostForm.css";
+import dummy_image from "../../../assets/no_image.png";
 
-const LostForm = () => {
+const LostForm = (props) => {
+  const { onSubmit, loading, onClose } = props;
+  const [previewImage, setPreviewImage] = useState(dummy_image);
+  const [formData, setFormData] = useState({
+    name: "",
+    place: "",
+    detail: "",
+    picture: "",
+  });
+  const handleFormData = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    if (!file) {
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      setPreviewImage(reader.result);
+    };
+    reader.readAsDataURL(file);
+    setFormData((prev) => ({ ...prev, picture: file }));
+    console.log(formData);
+  };
+  // console.log(formData);
   return (
     <>
       <div className="container">
-        <h1 className="form-title">落とし物追加フォーム</h1>
+        <div className="columns">
+          <div className="column is-8">
+            <h1 className="form-title">落とし物追加フォーム</h1>
+          </div>
+          <div className="delete-button-container column">
+            <button className="button luckiest-guy" onClick={() => onClose()}>
+              x
+            </button>
+          </div>
+        </div>
         <div className="columns">
           <div className="column is-6">
-            <div className="file">
+            <div className="file center">
               <label className="file-label">
-                <input className="file-input" type="file" name="photo" />
+                <input
+                  className="file-input"
+                  accept="image/*"
+                  type="file"
+                  name="picture"
+                  onChange={handleImage}
+                />
                 <span className="file-cta">
                   <span className="file-icon">
                     <i className="fas fa-upload"></i>
@@ -18,39 +61,49 @@ const LostForm = () => {
                 </span>
               </label>
             </div>
+            <div className="preview">
+              <img
+                className="preview-img"
+                src={previewImage}
+                alt="preview"
+                height="200px"
+                width="200px"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
           </div>
           <div className="column is-6">
-            <h2 className="info">LOST PROPERTY</h2>
+            <h2 className="info">落とし物</h2>
             <div className="field">
               <div className="control">
-                <input className="input" type="text" />
+                <input
+                  name="name"
+                  onChange={handleFormData}
+                  className="input"
+                  type="text"
+                />
               </div>
             </div>
-            <h2 className="info">PLACE</h2>
+            <h2 className="info">場所</h2>
             <div className="field">
               <div className="control">
-                <input className="input" type="text" />
+                <input
+                  name="place"
+                  onChange={handleFormData}
+                  className="input"
+                  type="text"
+                />
               </div>
             </div>
-            <h2 className="info">PIN COLOR</h2>
+            <h2 className="info">詳細</h2>
             <div className="field">
               <div className="control">
-                <div className="select">
-                  <select>
-                    <option>赤</option>
-                    <option>黄</option>
-                    <option>緑</option>
-                    <option>青</option>
-                    <option>桃</option>
-                    <option>紫</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <h2 className="info">DETAIL</h2>
-            <div className="field">
-              <div className="control">
-                <input className="input" type="text" />
+                <input
+                  name="detail"
+                  onChange={handleFormData}
+                  className="input"
+                  type="text"
+                />
               </div>
             </div>
           </div>
@@ -58,6 +111,12 @@ const LostForm = () => {
       </div>
     </>
   );
+};
+
+LostForm.propTypes = {
+  onSubmit: propTypes.func.isRequired,
+  loading: propTypes.bool.isRequired,
+  onClose: propTypes.func.isRequired,
 };
 
 export default LostForm;
