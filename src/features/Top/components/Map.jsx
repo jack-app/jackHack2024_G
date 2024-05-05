@@ -31,7 +31,7 @@ const Map = (props) => {
           <MarkerF key={item.id} position={{ lat: item.lat, lng: item.lng}}>
             <InfoWindowF position={{ lat: item.lat, lng: item.lng}}>
               <div>   
-                <img src = {item.picture} width="100" height="100" alt="落とし物画像" className="pin-image"/>
+                <img src = {item.picture} width="200" height="200" alt="落とし物画像" className="pin-image"/>
                 <h1 class = "pin-text">落とし物</h1>
                 <h2 class = "pin-info">{item.name}</h2>
                 <h1 class = "pin-text">発見場所</h1>
@@ -40,7 +40,7 @@ const Map = (props) => {
                 <h2 class = "pin-info">~ここに日時が入る~</h2>
                 <h1 class = "pin-text">詳細</h1>
                 <h2 class = "pin-info">{item.detail}</h2>
-                <h2 class = "pin-info">{item.tags.map((tag) => (
+                <h2 class = "tag-info">{item.tags.map((tag) => (
                   <span className = "pin-tags">{tag}</span>
                 ))}</h2>
               </div>
