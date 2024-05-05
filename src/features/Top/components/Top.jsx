@@ -3,9 +3,36 @@ import Map from "./Map";
 import "../styles/Top.css";
 import CirclarButton from "@common/components/CirclarButton";
 import LostFormModal from "./LostFormModal";
+import useLostItem from "../hooks/useLostItem";
+
+const tmpItemList = [
+  {
+    id: 1,
+    lat: 35.15396053659968,
+    lng: 136.96864789075318,
+  },
+  {
+    id: 2,
+    lat: 34.15396053659968,
+    lng: 135.96864789075318,
+  },
+];
 
 const Top = () => {
   const [isLostFormOpen, setIsLostFormOpen] = useState(false);
+  const [lostItemList, setLostItemList] = useState(tmpItemList);
+  const [loading, setLoading] = useState(false);
+
+  const handleSearch = async (keyword) => {};
+
+  // 追加
+  const handleSubmit = async (formData) => {
+    setLoading(true);
+    const responceItemList = await useLostItem(formData);
+    setLostItemList(responceItemList);
+    setLoading(false);
+    // POSTリクエスト後の処理をここに追加する
+  };
 
   return (
     <>
@@ -30,7 +57,7 @@ const Top = () => {
       </div>
       <div className="columns">
         <div className="column is-10">
-          <Map />
+          <Map items={lostItemList} />
         </div>
         <div className="column is-2 button-container" style={{ margin: "1em" }}>
           <CirclarButton
@@ -54,6 +81,8 @@ const Top = () => {
       <LostFormModal
         open={isLostFormOpen}
         onClose={() => setIsLostFormOpen(false)}
+        onSubmit={handleSubmit}
+        loading={loading}
       />
     </>
   );

@@ -1,4 +1,10 @@
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  InfoWindowF,
+  LoadScript,
+  MarkerF,
+} from "@react-google-maps/api";
+import propTypes from "prop-types";
 
 // 名古屋大学の緯度、経度
 const defaultLatLng = {
@@ -11,16 +17,29 @@ const containerStyle = {
   height: "400px",
 };
 
-const Map = () => {
+const Map = (props) => {
+  const { items } = props;
   return (
     <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAP_API_KEY}>
       <GoogleMap
         center={defaultLatLng}
         zoom={10}
         mapContainerStyle={containerStyle}
-      ></GoogleMap>
+      >
+        {items.map((item) => (
+          <MarkerF key={item.id} position={{ lat: item.lat, lng: item.lng }}>
+            <InfoWindowF position={{ lat: item.lat, lng: item.lng }}>
+              <div>hello</div>
+            </InfoWindowF>
+          </MarkerF>
+        ))}
+      </GoogleMap>
     </LoadScript>
   );
+};
+
+Map.propTypes = {
+  items: propTypes.array.isRequired,
 };
 
 export default Map;
