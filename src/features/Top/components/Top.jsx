@@ -3,19 +3,20 @@ import Map from "./Map";
 import "../styles/Top.css";
 import CirclarButton from "@common/components/CirclarButton";
 import LostFormModal from "./LostFormModal";
-import useLostItem from "../hooks/useLostItem";
+// import useLostItem from "../hooks/useLostItem";
 
 const tmpItemList = [
   {
     id: 1,
     lat: 35.15396053659968,
     lng: 136.96864789075318,
-  },
-  {
-    id: 2,
-    lat: 34.15396053659968,
-    lng: 135.96864789075318,
-  },
+    picture: "https://japaclip.com/files/long-wallet-bills.png",
+    name: "財布",
+    place: "名大図書館前",
+    detail: "犬のストラップがついている",
+    tags: ["赤い","財布","革","四角","古い"],
+
+  }
 ];
 
 const Top = () => {

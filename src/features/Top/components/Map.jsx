@@ -27,9 +27,19 @@ const Map = (props) => {
         mapContainerStyle={containerStyle}
       >
         {items.map((item) => (
-          <MarkerF key={item.id} position={{ lat: item.lat, lng: item.lng }}>
-            <InfoWindowF position={{ lat: item.lat, lng: item.lng }}>
-              <div>hello</div>
+          <MarkerF key={item.id} position={{ lat: item.lat, lng: item.lng}}>
+            <InfoWindowF position={{ lat: item.lat, lng: item.lng}}>
+              <div>
+                <h1>落とし物</h1>
+                <h2>{item.name}</h2>
+                <h1>発見場所</h1>
+                <h2>{item.place}</h2>
+                <h1>発見時刻</h1>
+                <h2>~ここに日時が入る~</h2>
+                <h1>詳細</h1>
+                <h2>{item.detail}</h2>
+                <h2>{item.tags}</h2>
+              </div>
             </InfoWindowF>
           </MarkerF>
         ))}
