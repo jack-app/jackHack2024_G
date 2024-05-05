@@ -5,6 +5,9 @@ import random
 from datetime import datetime
 from photo_decode import convert_base64_to_image
 from gpt_tag import gpt_tag
+from dotenv import load_dotenv
+# .envファイルの内容を読み込み
+load_dotenv()
 
 def generate_id(length=36):
     # ランダムな数字列を生成する
@@ -66,3 +69,4 @@ def save_mysql(lost_item_name,latitude,longitude,base64_string,detail):
             cursor.close()
             connection.close()
             print("MySQL接続は閉じられました")
+

@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 # .envファイルの内容を読み込み
 load_dotenv()
 
-
 # 現在のスクリプトのディレクトリパスを取得
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -26,10 +25,10 @@ try:
         ssl_ca=ssl_ca_path,
         ssl_verify_cert=True
     )
+
     if connection.is_connected():
         db_info = connection.get_server_info()
         print("MySQLサーバーに接続しました:", db_info)
-
         # 接続を閉じる
         connection.close()
 except Error as e:

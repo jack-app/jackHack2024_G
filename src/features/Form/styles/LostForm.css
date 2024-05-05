@@ -1,0 +1,19 @@
+.form-title {
+  font-family: "Yusei Magic", sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  color: #6c2100;
+  text-align: left;
+}
+
+.info {
+  background: linear-gradient(transparent 80%, #232d90 0%);
+  text-align: left;
+  font-family: "Luckiest Guy", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.delete-button-container {
+  text-align: right;
+}
