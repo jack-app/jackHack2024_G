@@ -11,11 +11,12 @@ ssl_ca_path = os.path.join(current_dir, 'DigiCertGlobalRootCA.crt.pem')
 
 try:
     # 接続の作成
+    # SSL証明書を使用してデータベースに接続
     connection = mysql.connector.connect(
-        host='jackhack2024server.mysql.database.azure.com',
-        user='Koki',
-        password='password1234!',  # 実際のパスワードに置き換えてください
-        database='jackhackserver',  # 接続したいデータベース名を指定
+        host=os.environ['CONNECTION_HOST'],
+        user=os.environ['CONNECTION_USER'],
+        password=os.environ['CONNECTION_PASSWORD'],  # 実際のパスワードに置き換えてください
+        database=os.environ['CONNECTION_DATABASE'],  # 接続したいデータベース名を指定
     )
     if connection.is_connected():
         db_info = connection.get_server_info()
