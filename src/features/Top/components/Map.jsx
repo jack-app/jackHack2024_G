@@ -41,7 +41,7 @@ const Map = (props) => {
                 <h1 class = "pin-text">詳細</h1>
                 <h2 class = "pin-info">{item.detail}</h2>
                 <h2 class = "pin-info">{item.tags.map((tag) => (
-                  <span>{tag}</span>
+                  <span className = "pin-tags">{tag}</span>
                 ))}</h2>
               </div>
             </InfoWindowF>
