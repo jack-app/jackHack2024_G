@@ -26,7 +26,3 @@
   cursor: pointer;
   transition: 0.2s cubic-bezier(0.45, 0, 0.55, 1);
 }
-
-.delete-button-container {
-  text-align: right;
-}
