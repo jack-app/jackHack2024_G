@@ -44,6 +44,6 @@ def search_mysql(keyword):
             print("データベース接続が閉じられました")
     return pd.DataFrame()  # エラーが発生した場合は空のDataFrameを返す
 
-# 使用例
-df = search_mysql("あ")
-print(df)
+# # 使用例
+# df = search_mysql("あ")
+# print(df)

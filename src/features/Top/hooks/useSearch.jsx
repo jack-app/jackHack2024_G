@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 
-const useSearch = (keyword) => {
+const searchLostItem = (keyword) => {
   // jsonの形式に合わせる
   const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-
-  const searchData = async (keyword) => {
+  const searchData = async () => {
     try {
-      const response = await fetch(URL, {
+      const response = await fetch("http://127.0.0.1:5000/search", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -24,14 +22,13 @@ const useSearch = (keyword) => {
         throw new Error("検索に失敗しました");
       }
       const responseData = await response.json();
+      console.log(responseData);
       setData(responseData);
-      setError(null);
     } catch (error) {
-      setError(error.message);
+      console.log(error.message);
     }
   };
-
-  return { error, data };
+  searchData();
 };
 
-export default useSearch;
+export default searchLostItem;

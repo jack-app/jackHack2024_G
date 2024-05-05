@@ -1,37 +1,56 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Map from "./Map";
 import "../styles/Top.css";
 import CirclarButton from "@common/components/CirclarButton";
 import LostFormModal from "./LostFormModal";
-import useLostItem from "../hooks/useLostItem";
-
-const tmpItemList = [
-  {
-    id: 1,
-    lat: 35.15396053659968,
-    lng: 136.96864789075318,
-  },
-  {
-    id: 2,
-    lat: 34.15396053659968,
-    lng: 135.96864789075318,
-  },
-];
+// import useSearch from "../hooks/useSearch";
+// import { searchLostItem } from "../hooks/useSearch";
+// import useLostItem from "../hooks/useLostItem";
 
 const Top = () => {
   const [isLostFormOpen, setIsLostFormOpen] = useState(false);
-  const [lostItemList, setLostItemList] = useState(tmpItemList);
+  const [lostItemList, setLostItemList] = useState([]);
+  const [keyword, setKeyword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSearch = async (keyword) => {};
+  const fetchData = async (keyword) => {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // 他に必要なヘッダーがあれば追加する
+        },
+        body: JSON.stringify(
+          // 送信するデータをjson形式に変換する
+          {
+            keyword: keyword,
+          }
+        ),
+      });
+      if (!response.ok) {
+        throw new Error("検索に失敗しました");
+      }
+      const responseData = await response.json();
+      console.log(responseData);
+      // 緯度経度を数字に直す
+      responseData.forEach((item) => {
+        item.latitude = Number(item.latitude);
+        item.longitude = Number(item.longitude);
+      });
+      setLostItemList(responseData);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
-  // 追加
-  const handleSubmit = async (formData) => {
-    setLoading(true);
-    const responceItemList = await useLostItem(formData);
-    setLostItemList(responceItemList);
-    setLoading(false);
-    // POSTリクエスト後の処理をここに追加する
+  useEffect(() => {
+    fetchData(keyword);
+  }, []);
+
+  // キーワード検索
+  const handleClick = async () => {
+    fetchData(keyword);
   };
 
   return (
@@ -45,10 +64,14 @@ const Top = () => {
             className="input luckiest-guy"
             type="text"
             placeholder="SEARCH"
+            onChange={(e) => setKeyword(e.target.value)}
           />
         </div>
         <div className="control">
-          <button className="button is-danger is-outlined">
+          <button
+            className="button is-danger is-outlined"
+            onClick={() => handleClick()}
+          >
             <span>&nbsp;</span>
             <i className="fas fa-search"></i>
             <span>&nbsp;</span>
@@ -81,7 +104,7 @@ const Top = () => {
       <LostFormModal
         open={isLostFormOpen}
         onClose={() => setIsLostFormOpen(false)}
-        onSubmit={handleSubmit}
+        onSubmit={() => console.log("submit")}
         loading={loading}
       />
     </>

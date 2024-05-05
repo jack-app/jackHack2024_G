@@ -26,13 +26,23 @@ const Map = (props) => {
         zoom={10}
         mapContainerStyle={containerStyle}
       >
-        {items.map((item) => (
-          <MarkerF key={item.id} position={{ lat: item.lat, lng: item.lng }}>
-            <InfoWindowF position={{ lat: item.lat, lng: item.lng }}>
-              <div>hello</div>
-            </InfoWindowF>
-          </MarkerF>
-        ))}
+        {items.map(
+          (item) => (
+            console.log(item),
+            (
+              <MarkerF
+                key={item.id}
+                position={{ lat: item.latitude, lng: item.longitude }}
+              >
+                <InfoWindowF
+                  position={{ lat: item.latitude, lng: item.longitude }}
+                >
+                  <div>hello</div>
+                </InfoWindowF>
+              </MarkerF>
+            )
+          )
+        )}
       </GoogleMap>
     </LoadScript>
   );
