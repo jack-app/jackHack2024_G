@@ -40,3 +40,5 @@ def get_data():
             connection.close()
             print("データベース接続が閉じられました")
     return pd.DataFrame()  # エラーが発生した場合は空のDataFrameを返す
+
+print(get_data())

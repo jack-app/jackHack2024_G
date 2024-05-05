@@ -2,7 +2,8 @@ from flask import Flask
 from flask import Flask
 from flask import request, make_response, jsonify
 from flask_cors import CORS
-
+import delete_data
+import image_recog_gemini
 from serchdata import search_mysql
 
 app = Flask(__name__)
@@ -27,6 +28,12 @@ def search():
         return jsonify(result)  # JSON 形式で結果を返す
     except Exception as e:
         return jsonify({'error': str(e)}), 500  # 予期せぬエラーが発生した場合
+
+@app.route('/delete')
+def delete():
+    id = 
+    delete_data.delete_data(int(id))
+
 
 if __name__ == "__main__":
     app.run()
