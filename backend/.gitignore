@@ -1,1 +1,4 @@
 .venv
+.env
+__pychache__
+DigiCertGlobalRootCA.crt.pem
