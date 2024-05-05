@@ -26,10 +26,10 @@ try:
         ssl_ca=ssl_ca_path,
         ssl_verify_cert=True
     )
+
     if connection.is_connected():
         db_info = connection.get_server_info()
         print("MySQLサーバーに接続しました:", db_info)
-
         # 接続を閉じる
         connection.close()
 except Error as e:
