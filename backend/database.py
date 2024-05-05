@@ -1,6 +1,11 @@
 import mysql.connector
 from mysql.connector import Error
 import os
+from dotenv import load_dotenv
+
+# .envファイルの内容を読み込み
+load_dotenv()
+
 
 # 現在のスクリプトのディレクトリパスを取得
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -10,6 +15,8 @@ ssl_ca_path = os.path.join(current_dir, 'DigiCertGlobalRootCA.crt.pem')
 
 
 try:
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    ssl_ca_path = os.path.join(current_dir, os.environ['SSL'])
     # 接続の作成
     connection = mysql.connector.connect(
         host=os.environ['CONNECTION_HOST'],
