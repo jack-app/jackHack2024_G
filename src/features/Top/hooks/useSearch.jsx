@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-const useSearch = (keyword) => {
+const useSearch = () => {
   // jsonの形式に合わせる
   const [lostItemList, setLostItemList] = useState([]);
   const fetchData = async (keyword) => {
