@@ -4,6 +4,8 @@ import os
 from mysql.connector import Error
 from dotenv import load_dotenv
 
+from photo_decode import image_file_to_base64
+
 # .envファイルの内容を読み込み
 load_dotenv()
 
@@ -36,6 +38,11 @@ def search_mysql(keyword):
             result = cursor.fetchall()
             columns = ['id', 'name', 'latitude', 'longitude', 'place', 'detail', 'tags', 'photo_path']
             df = pd.DataFrame(result, columns=columns)
+
+            # photo_pathのBase64エンコーディング
+            df['photo_path'] = df['photo_path'].apply(lambda x: image_file_to_base64(x if x else None))
+            df['photo_path'] = df['photo_path'][1:].replace("'", "")
+            print(df['photo_path'][:100])
 
             # DataFrameをJSON形式の文字列に変換
             json_result = df.to_json(orient='records')

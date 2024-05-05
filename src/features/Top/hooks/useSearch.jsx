@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
-const searchLostItem = (keyword) => {
+const useSearch = (keyword) => {
   // jsonの形式に合わせる
-  const [data, setData] = useState(null);
-  const searchData = async () => {
+  const [lostItemList, setLostItemList] = useState([]);
+  const fetchData = async (keyword) => {
     try {
       const response = await fetch("http://127.0.0.1:5000/search", {
         method: "POST",
@@ -23,12 +23,24 @@ const searchLostItem = (keyword) => {
       }
       const responseData = await response.json();
       console.log(responseData);
-      setData(responseData);
+
+      responseData.forEach((item) => {
+        // 緯度経度を数字に直す
+        item.latitude = Number(item.latitude);
+        item.longitude = Number(item.longitude);
+
+        // タグを配列に直す
+        item.tags = item.tags.split(",");
+      });
+
+      setLostItemList(responseData);
+      console.log(responseData);
     } catch (error) {
       console.log(error.message);
     }
   };
-  searchData();
+
+  return [lostItemList, { fetchData }];
 };
 
-export default searchLostItem;
+export default useSearch;

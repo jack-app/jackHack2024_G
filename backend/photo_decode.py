@@ -20,12 +20,13 @@ def convert_base64_to_image(base64_string, directory="photo-folder"):
     # ランダムなIDを生成してファイル名として使用
     image_filename = generate_id() + ".jpg"
     image_path = os.path.join(directory, image_filename)
-    
+
     # ディレクトリが存在しなければ作成
     if not os.path.exists(directory):
         os.makedirs(directory)
 
     # Base64エンコードされたデータをデコードする
+    base64_string = base64_string.split(",")[-1]
     image_data = base64.b64decode(base64_string)
     
     # デコードされた画像データをファイルに書き込む
@@ -33,3 +34,9 @@ def convert_base64_to_image(base64_string, directory="photo-folder"):
         image_file.write(image_data)
     
     return image_path  # 生成した画像のパスを返す
+
+def image_file_to_base64(file_path):
+    # ファイルをバイナリモードで読み込む
+    with open(file_path, "rb") as image_file:
+        data = base64.b64encode(image_file.read())
+    return data

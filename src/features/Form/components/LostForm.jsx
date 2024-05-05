@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import propTypes from "prop-types";
 import "../styles/LostForm.css";
 import dummy_image from "../../../assets/no_image.png";
+import usePosition from "@common/hooks/usePosition";
 
 const LostForm = (props) => {
-  const { onSubmit, loading, onClose } = props;
+  const { loading, onClose } = props;
   const [previewImage, setPreviewImage] = useState(dummy_image);
   const [formData, setFormData] = useState({
     name: "",
@@ -12,6 +13,10 @@ const LostForm = (props) => {
     detail: "",
     picture: "",
   });
+  const [position, { getPosition }] = usePosition();
+  useEffect(() => {
+    getPosition();
+  }, []);
   const handleFormData = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -26,6 +31,36 @@ const LostForm = (props) => {
       setPreviewImage(reader.result);
       setFormData((prev) => ({ ...prev, picture: reader.result }));
     };
+  };
+
+  const insertData = async (formData) => {
+    try {
+      console.log(formData);
+      console.log(position);
+      const response = await fetch("http://127.0.0.1:5000/insert", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // 他に必要なヘッダーがあれば追加する
+        },
+        body: JSON.stringify(
+          // 送信するデータをjson形式に変換する
+          {
+            name: formData.name,
+            place: formData.place,
+            detail: formData.detail,
+            picture: formData.picture,
+            latitude: position.latitude,
+            longitude: position.longitude,
+          }
+        ),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to post data");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
   return (
     <>
@@ -108,7 +143,7 @@ const LostForm = (props) => {
               </div>
             </div>
             <div>
-              <button className="button" onClick={() => onSubmit(formData)}>
+              <button className="button" onClick={() => insertData(formData)}>
                 送信
               </button>
             </div>
@@ -120,7 +155,6 @@ const LostForm = (props) => {
 };
 
 LostForm.propTypes = {
-  onSubmit: propTypes.func.isRequired,
   loading: propTypes.bool.isRequired,
   onClose: propTypes.func.isRequired,
 };

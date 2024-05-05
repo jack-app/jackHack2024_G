@@ -6,6 +6,7 @@ from datetime import datetime
 from photo_decode import convert_base64_to_image
 from gpt_tag import gpt_tag
 from dotenv import load_dotenv
+
 # .envファイルの内容を読み込み
 load_dotenv()
 
@@ -18,7 +19,7 @@ def generate_time():
     pickup_time = datetime.now()
     return pickup_time
 
-def save_mysql(lost_item_name,latitude,longitude,base64_string,detail):
+def save_mysql(lost_item_name, latitude, longitude, base64_string, detail, place):
     # データベースへ接続
     try:
         # SSL証明書を使用してデータベースに接続
@@ -43,18 +44,16 @@ def save_mysql(lost_item_name,latitude,longitude,base64_string,detail):
             time = generate_time()
             id = generate_id()
             # photo_path  = "/photo-folder/IMG_2275.JPG"  # 画像のパス
-            convert_base64_to_image(base64_string, directory="photo-folder")
-
             photo_path = convert_base64_to_image(base64_string, directory="photo-folder")
 
             tags = gpt_tag(base64_string)
 
             # SQL INSERT文
             insert_query = """
-            INSERT INTO lost_item (id, name, latitude, longitude, time, photo_path, detail, tags)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO lost_item (id, name, latitude, longitude, time, photo_path, detail, place, tags)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             """
-            data = (id, lost_item_name, latitude, longitude, time, photo_path, detail, tags)
+            data = (id, lost_item_name, latitude, longitude, time, photo_path, detail, place, tags)
 
             # クエリの実行
             cursor.execute(insert_query, data)

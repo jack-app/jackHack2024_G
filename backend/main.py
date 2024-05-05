@@ -4,6 +4,7 @@ from insertdb import save_mysql
 from flask_cors import CORS
 from delete_data import delete_data
 from serchdata import search_mysql
+from insertdb import save_mysql
 
 app = Flask(__name__)
 
@@ -45,6 +46,22 @@ def delete():
     data = request.get_json()
     id = data['id']
     delete_data(id)
+
+@app.route('/insert', methods = ['GET', 'POST'])
+def insert():
+    data = request.get_json()
+    name = data['name']
+    latitude = str(data['latitude'])
+    longitude = str(data['longitude'])
+    base64_string = data['picture']
+    detail = data['detail']
+    place = data['place']
+    print(name, latitude, longitude,  detail, place)
+    try:
+        save_mysql(name, latitude, longitude, base64_string, detail, place)
+        return jsonify({'status': 'success'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500  # 予期せぬエラーが発生した場合
 
 if __name__ == "__main__":
     app.run()
