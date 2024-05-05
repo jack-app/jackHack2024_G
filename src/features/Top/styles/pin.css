@@ -1,10 +1,16 @@
 .pin-text{
   font-family: "Yusei Magic", sans-serif;
-  font-weight: 400;
+  font-weight: 900;
   font-style: normal;
-  color: #6c2100;
+  color: #000000c5;
   text-align: left;
+  background-color: rgba(255, 36, 7, 0.322);
+ 
 }
 .pin-info{
-    
+  font-family: "Yusei magic", sans-serif;
+  text-align: right;
+  color: black;
+
+  
 }
