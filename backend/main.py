@@ -1,12 +1,15 @@
-from flask import Flask, request, jsonify
-from serchdata import search_mysql  # search_mysql ?��֐�?��?��?��C?��?��?��|?��[?��g?��?��?��?��p?��X?��?��?��m?��F
-from insertdb import save_mysql
+from flask import Flask
+from flask import Flask
+from flask import request, make_response, jsonify
 from flask_cors import CORS
-from delete_data import delete_data
+
 from serchdata import search_mysql
 from insertdb import save_mysql
+from delete_data import delete_data
+
 
 app = Flask(__name__)
+CORS(app) #Cross Origin Resource Sharing
 
 @app.route('/')
 def hello():
@@ -24,28 +27,19 @@ def search():
         # search_mysql 関数を呼び出して DataFrame を取�?
         df = search_mysql(keyword)
         return df
-        # # DataFrame �? JSON 形式に変換
-        # result = df.to_dict(orient='records')  # レコードごとに辞書形式で出�?
-        # print(result)
-        # return jsonify(result)  # JSON 形式で結果を返す
     except Exception as e:
         return jsonify({'error': str(e)}), 500  # 予期せぬエラーが発生した�?��?
+
     
-@app.route('/insert',methos = ['GET'])
-def insert():
-    data = request.get_json()
-    name = data['name']
-    latitude = data['latitude']
-    longitude = data['longitude']
-    base64_string = data['base64_string']
-    detail = data['detail']
-    save_mysql(name,latitude,longitude,base64_string,detail)
-    
-@app.route('/delete',methos = ['GET'])
+@app.route('/delete',methods = ['GET', 'POST'])
 def delete():
     data = request.get_json()
     id = data['id']
-    delete_data(id)
+    try:
+        delete_data(id)
+        return jsonify({'status': 'success'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500  # 予期せぬエラーが発生した場合
 
 @app.route('/insert', methods = ['GET', 'POST'])
 def insert():
@@ -56,7 +50,6 @@ def insert():
     base64_string = data['picture']
     detail = data['detail']
     place = data['place']
-    print(name, latitude, longitude,  detail, place)
     try:
         save_mysql(name, latitude, longitude, base64_string, detail, place)
         return jsonify({'status': 'success'}), 200

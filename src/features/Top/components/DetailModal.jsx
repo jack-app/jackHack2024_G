@@ -3,9 +3,32 @@ import propTypes from "prop-types";
 const DetailModal = (props) => {
   const { open, onClose, onSubmit, item } = props;
 
+  const deleteData = async (id) => {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/delete", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // 他に必要なヘッダーがあれば追加する
+        },
+        body: JSON.stringify(
+          // 送信するデータをjson形式に変換する
+          {
+            id: id,
+          }
+        ),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to post data");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   const handleCollect = (id) => {
     if (confirm("本当に回収しましたか？")) {
-      onSubmit(id);
+      deleteData(id);
       onClose();
     }
   };
@@ -39,8 +62,10 @@ const DetailModal = (props) => {
               <h2 className="pin-info">{item.detail}</h2>
               <h2 className="tag-info">{item.tag}</h2>
               <h2 className="tag-info">
-                {item.tags.map((tag) => (
-                  <span className="pin-tags">{tag}</span>
+                {item.tags.map((tag, index) => (
+                  <span key={`detail-modal-${index}`} className="pin-tags">
+                    {tag}
+                  </span>
                 ))}
               </h2>
             </div>
