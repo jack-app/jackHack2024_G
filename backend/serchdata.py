@@ -26,15 +26,15 @@ def search_mysql(keyword):
             print("MySQLサーバーに接続しました:", db_info)
 
             query = """
-            SELECT id, lost_item_name, latitude, longitude, place, detail, tag
+            SELECT id, name, latitude, longitude, place, detail, tag
             FROM lost_item
-            WHERE lost_item_name LIKE %s OR place LIKE %s OR detail LIKE %s OR tag LIKE %s
+            WHERE name LIKE %s OR place LIKE %s OR detail LIKE %s OR tag LIKE %s
             """
             keyword_pattern = f"%{keyword}%"
             cursor = connection.cursor()
             cursor.execute(query, [keyword_pattern] * 4)  # パラメータをリストで渡す
             result = cursor.fetchall()
-            columns = ['id', 'lost_item_name', 'latitude', 'longitude', 'place', 'detail', 'tag']
+            columns = ['id', 'name', 'latitude', 'longitude', 'place', 'detail', 'tag']
             df = pd.DataFrame(result, columns=columns)
 
             # DataFrameをJSON形式の文字列に変換

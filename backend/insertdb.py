@@ -3,6 +3,8 @@ from mysql.connector import Error
 import os
 import random
 from datetime import datetime
+from photo_decode import convert_base64_to_image
+from gpt_tag import gpt_tag
 
 def generate_id(length=36):
     # ランダムな数字列を生成する
@@ -13,47 +15,54 @@ def generate_time():
     pickup_time = datetime.now()
     return pickup_time
 
-# データベースへ接続
-try:
-    # SSL証明書を使用してデータベースに接続
-    connection = mysql.connector.connect(
-        host=os.environ['CONNECTION_HOST'],
-        user=os.environ['CONNECTION_USER'],
-        password=os.environ['CONNECTION_PASSWORD'],  # 実際のパスワードに置き換えてください
-        database=os.environ['CONNECTION_DATABASE'],  # 接続したいデータベース名を指定
-    )
+def save_mysql(lost_item_name,latitude,longitude,base64_string,detail):
+    # データベースへ接続
+    try:
+        # SSL証明書を使用してデータベースに接続
+        connection = mysql.connector.connect(
+            host=os.environ['CONNECTION_HOST'],
+            user=os.environ['CONNECTION_USER'],
+            password=os.environ['CONNECTION_PASSWORD'],  # 実際のパスワードに置き換えてください
+            database=os.environ['CONNECTION_DATABASE'],  # 接続したいデータベース名を指定
+        )
 
-    if connection.is_connected():
-        db_info = connection.get_server_info()
-        print("MySQLサーバーに接続しました:", db_info)
+        if connection.is_connected():
+            db_info = connection.get_server_info()
+            print("MySQLサーバーに接続しました:", db_info)
 
-        # カーソルを作成
-        cursor = connection.cursor()
+            # カーソルを作成
+            cursor = connection.cursor()
 
-        # 挿入するデータ
-        lost_item_name = "b"
-        latitude = 35.15641491577097
-        longitude = 136.96419518693924
-        time = generate_time()
-        id = generate_id()
+            # 挿入するデータ
+            # lost_item_name = "c"
+            # latitude = 35.15641491577097
+            # longitude = 136.96419518693924
+            time = generate_time()
+            id = generate_id()
+            # photo_path  = "/photo-folder/IMG_2275.JPG"  # 画像のパス
+            convert_base64_to_image(base64_string, directory="photo-folder")
 
-        # SQL INSERT文
-        insert_query = """
-        INSERT INTO lost_item (id, lost_item_name, latitude, longitude, time)
-        VALUES (%s, %s, %s, %s, %s)
-        """
-        data = (id, lost_item_name, latitude, longitude, time)
+            photo_path = convert_base64_to_image(base64_string, directory="photo-folder")
 
-        # クエリの実行
-        cursor.execute(insert_query, data)
-        connection.commit()  # トランザクションのコミット
-        print("データがデータベースに挿入されました")
+            tags = gpt_tag(base64_string)
 
-except Error as e:
-    print("エラーが発生しました:", e)
+            # SQL INSERT文
+            insert_query = """
+            INSERT INTO lost_item (id, name, latitude, longitude, time, photo_path, detail, tags)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            """
+            data = (id, lost_item_name, latitude, longitude, time, photo_path, detail, tags)
 
-finally:
-    if connection.is_connected():
-        cursor.close()
-        connection.close()
-        print("MySQL接続は閉じられました")
+            # クエリの実行
+            cursor.execute(insert_query, data)
+            connection.commit()  # トランザクションのコミット
+            print("データがデータベースに挿入されました")
+
+    except Error as e:
+        print("エラーが発生しました:", e)
+
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL接続は閉じられました")
