@@ -61,7 +61,7 @@ const Map = (props) => {
                   >
                     <div>
                       <img
-                        src={item.photo_path}
+                        src={`data:image/png;base64,${item.photo_path}`}
                         width="200"
                         height="200"
                         alt="落とし物画像"
@@ -75,12 +75,14 @@ const Map = (props) => {
                       <h2 className="pin-info">~ここに日時が入る~</h2>
                       <h1 className="pin-text">詳細</h1>
                       <h2 className="pin-info">{item.detail}</h2>
-                      {/* <h2 className="tag-info">
-                  {item.tags.map((tag) => (
-                    <span className="pin-tags">{tag}</span>
-                  ))}
-                </h2> */}
-                      <h2 className="tag-info">{item.tag}</h2>
+                      <h2 className="tag-info">
+                        {item.tags.map((tag, index) => (
+                          <span key={`tag-${index}`} className="pin-tags">
+                            {tag}
+                          </span>
+                        ))}
+                      </h2>
+                      {/* <h2 className="tag-info">{item.tag}</h2> */}
                     </div>
                   </InfoWindowF>
                 )}

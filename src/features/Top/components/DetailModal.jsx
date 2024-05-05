@@ -1,4 +1,4 @@
-import React from "react";
+import propTypes from "prop-types";
 
 const DetailModal = (props) => {
   const { open, onClose, onSubmit, item } = props;
@@ -21,7 +21,7 @@ const DetailModal = (props) => {
           <div className="columns">
             <div className="column">
               <img
-                src={item.photo_path}
+                src={`data:image/png;base64,${item.photo_path}`}
                 width="200"
                 height="200"
                 alt="落とし物画像"
@@ -38,13 +38,12 @@ const DetailModal = (props) => {
               <h1 className="pin-text">詳細</h1>
               <h2 className="pin-info">{item.detail}</h2>
               <h2 className="tag-info">{item.tag}</h2>
+              <h2 className="tag-info">
+                {item.tags.map((tag) => (
+                  <span className="pin-tags">{tag}</span>
+                ))}
+              </h2>
             </div>
-
-            {/* <h2 className="tag-info">
-          {item.tags.map((tag) => (
-            <span className="pin-tags">{tag}</span>
-          ))}
-        </h2> */}
           </div>
           <div>
             <button className="button" onClick={() => handleCollect(item.id)}>
@@ -55,6 +54,13 @@ const DetailModal = (props) => {
       </div>
     </div>
   );
+};
+
+DetailModal.propTypes = {
+  open: propTypes.bool.isRequired,
+  onClose: propTypes.func.isRequired,
+  onSubmit: propTypes.func.isRequired,
+  item: propTypes.object.isRequired,
 };
 
 export default DetailModal;

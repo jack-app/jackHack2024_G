@@ -55,7 +55,7 @@ def gpt_tag(base64_string):
                 {"type": "text", "text": prompt},
                 {
                     "type": "image_url",
-                    "image_url": f"data:image/jpeg;base64,{base64_string}"
+                    "image_url": base64_string
                 },
             ],
         }
@@ -73,9 +73,9 @@ def read_base64_from_file(file_path):
     with open(file_path, 'r') as file:
         return file.read().strip()
     
-path = 'output.txt'
+# path = 'output.txt'
 
-txt = read_base64_from_file(path)
+# txt = read_base64_from_file(path)
 
-gpt_tag(txt)
+# gpt_tag(txt)
 

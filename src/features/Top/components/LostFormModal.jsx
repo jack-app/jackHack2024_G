@@ -2,7 +2,7 @@ import propTypes from "prop-types";
 import LostForm from "@features/Form/components/LostForm";
 
 const LostFormModal = (props) => {
-  const { open, onClose, onSubmit, loading } = props;
+  const { open, onClose, loading } = props;
 
   return (
     <div
@@ -12,11 +12,7 @@ const LostFormModal = (props) => {
       <div className="modal-background" onClick={() => onClose()}></div>
       <div className="modal-card">
         <section className="modal-card-body">
-          <LostForm
-            onClose={() => onClose()}
-            onSubmit={onSubmit}
-            loading={loading}
-          />
+          <LostForm onClose={() => onClose()} loading={loading} />
         </section>
       </div>
     </div>
@@ -26,7 +22,6 @@ const LostFormModal = (props) => {
 LostFormModal.propTypes = {
   open: propTypes.bool.isRequired,
   onClose: propTypes.func.isRequired,
-  onSubmit: propTypes.func.isRequired,
   loading: propTypes.bool.isRequired,
 };
 
