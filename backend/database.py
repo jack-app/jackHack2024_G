@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 # .envファイルの内容を読み込み
 load_dotenv()
 
-
 # 現在のスクリプトのディレクトリパスを取得
 current_dir = os.path.dirname(os.path.abspath(__file__))
 

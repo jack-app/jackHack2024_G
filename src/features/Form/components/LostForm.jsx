@@ -1,6 +1,12 @@
+import { useState } from "react";
+import propTypes from "prop-types";
 import "../styles/LostForm.css";
 
-const LostForm = () => {
+const LostForm = (props) => {
+  const { onSubmit, loading } = props;
+  const [formData, setFormData] = useState({
+    // フォームデータの初期値を設定する
+  });
   return (
     <>
       <div className="container">
@@ -58,6 +64,11 @@ const LostForm = () => {
       </div>
     </>
   );
+};
+
+LostForm.propTypes = {
+  onSubmit: propTypes.func.isRequired,
+  loading: propTypes.bool.isRequired,
 };
 
 export default LostForm;

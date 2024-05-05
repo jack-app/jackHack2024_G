@@ -3,6 +3,9 @@ from mysql.connector import Error
 import os
 import random
 from datetime import datetime
+from dotenv import load_dotenv
+# .envファイルの内容を読み込み
+load_dotenv()
 
 def generate_id(length=36):
     # ランダムな数字列を生成する
@@ -31,8 +34,8 @@ try:
         cursor = connection.cursor()
 
         # 挿入するデータ
-        lost_item_name = "b"
-        latitude = 35.15641491577097
+        lost_item_name = "test"
+        latitude = 34.15641491577097
         longitude = 136.96419518693924
         time = generate_time()
         id = generate_id()

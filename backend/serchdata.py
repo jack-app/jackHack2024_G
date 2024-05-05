@@ -49,6 +49,7 @@ def search_mysql(keyword):
             print("データベース接続が閉じられました")
     return '[]'  # エラーが発生した場合は空のJSON配列を返す
 
-# 使用例
-json_data = search_mysql("あ")
-print(json_data)
+
+# # 使用例
+# df = search_mysql("あ")
+# print(df)
