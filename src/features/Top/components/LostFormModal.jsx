@@ -2,7 +2,7 @@ import propTypes from "prop-types";
 import LostForm from "@features/Form/components/LostForm";
 
 const LostFormModal = (props) => {
-  const { open, onClose } = props;
+  const { open, onClose, onSubmit, loading } = props;
 
   return (
     <div
@@ -17,7 +17,7 @@ const LostFormModal = (props) => {
               x
             </button>
           </div>
-          <LostForm />
+          <LostForm onSubmit={onSubmit} loading={loading} />
         </section>
       </div>
     </div>
@@ -25,8 +25,10 @@ const LostFormModal = (props) => {
 };
 
 LostFormModal.propTypes = {
-  open: propTypes.bool,
-  onClose: propTypes.func,
+  open: propTypes.bool.isRequired,
+  onClose: propTypes.func.isRequired,
+  onSubmit: propTypes.func.isRequired,
+  loading: propTypes.bool.isRequired,
 };
 
 export default LostFormModal;
