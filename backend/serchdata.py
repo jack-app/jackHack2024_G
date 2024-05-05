@@ -34,15 +34,21 @@ def search_mysql(keyword):
             cursor = connection.cursor()
             cursor.execute(query, [keyword_pattern] * 4)  # パラメータをリストで渡す
             result = cursor.fetchall()
-            df = pd.DataFrame(result, columns=['id', 'lost_item_name', 'latitude', 'longitude', 'place', 'detail', 'tag'])
-            return df
+            columns = ['id', 'lost_item_name', 'latitude', 'longitude', 'place', 'detail', 'tag']
+            df = pd.DataFrame(result, columns=columns)
+
+            # DataFrameをJSON形式の文字列に変換
+            json_result = df.to_json(orient='records')
+            return json_result
     except Error as e:
         print("エラーが発生しました:", e)
+        return {"error": str(e)}
     finally:
         if connection.is_connected():
             connection.close()
             print("データベース接続が閉じられました")
-    return pd.DataFrame()  # エラーが発生した場合は空のDataFrameを返す
+    return '[]'  # エラーが発生した場合は空のJSON配列を返す
+
 
 # # 使用例
 # df = search_mysql("あ")

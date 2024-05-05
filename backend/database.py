@@ -14,6 +14,8 @@ ssl_ca_path = os.path.join(current_dir, 'DigiCertGlobalRootCA.crt.pem')
 
 
 try:
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    ssl_ca_path = os.path.join(current_dir, os.environ['SSL'])
     # 接続の作成
     connection = mysql.connector.connect(
         host=os.environ['CONNECTION_HOST'],
@@ -23,10 +25,10 @@ try:
         ssl_ca=ssl_ca_path,
         ssl_verify_cert=True
     )
+
     if connection.is_connected():
         db_info = connection.get_server_info()
         print("MySQLサーバーに接続しました:", db_info)
-
         # 接続を閉じる
         connection.close()
 except Error as e:
