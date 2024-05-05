@@ -46,3 +46,13 @@
   opacity: 1;
   z-index: 10000;
 }
+
+.parent {
+  /* border: solid 1px #999; */
+  outline: solid 12px #fbd38a;
+  outline-offset: -0.1em;
+  border-radius: 0.5em;
+}
+/* .nested {
+  border-radius: 0.5em;
+} */

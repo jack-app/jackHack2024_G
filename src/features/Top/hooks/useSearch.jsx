@@ -31,6 +31,17 @@ const useSearch = (keyword) => {
 
         // タグを配列に直す
         item.tags = item.tags.split(",");
+
+        // 日付を整形する
+        const date = new Date(item.time - 32400000); // 日本時間に合わせる
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        item.time = `${year}/${month}/${day} ${hours}:${("0" + minutes).slice(
+          -2
+        )}`;
       });
 
       setLostItemList(responseData);

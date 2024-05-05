@@ -15,8 +15,8 @@ const LostFormModal = (props) => {
         className={`modal model-fx-normal ${open === true ? "is-active" : ""}`}
       >
         <div className="modal-background" onClick={() => onClose()}></div>
-        <div className="modal-card">
-          <section className="modal-card-body">
+        <div className="modal-card parent">
+          <section className="modal-card-body nested">
             <LostForm onClose={() => onClose()} setLoading={setLoading} />
           </section>
         </div>
@@ -26,6 +26,7 @@ const LostFormModal = (props) => {
           <div className="loading-over-lay"></div>
           <div className="loading">
             <MagnifyingGlass />
+            <div style={{ color: "white" }}>落とし物を追加中です...</div>
           </div>
         </>
       )}

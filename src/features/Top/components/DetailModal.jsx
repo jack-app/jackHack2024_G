@@ -57,7 +57,7 @@ const DetailModal = (props) => {
               <h1 className="pin-text">発見場所</h1>
               <h2 className="pin-info">{item.place}</h2>
               <h1 className="pin-text">発見時刻</h1>
-              <h2 className="pin-info">~ここに日時が入る~</h2>
+              <h2 className="pin-info">{item.time}</h2>
               <h1 className="pin-text">詳細</h1>
               <h2 className="pin-info">{item.detail}</h2>
               <h2 className="tag-info">{item.tag}</h2>

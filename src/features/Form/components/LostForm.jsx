@@ -62,6 +62,12 @@ const LostForm = (props) => {
     } catch (error) {
       console.log(error.message);
     }
+    setFormData({
+      name: "",
+      place: "",
+      detail: "",
+      picture: "",
+    });
     setLoading(false);
     onClose();
   };

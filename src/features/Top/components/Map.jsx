@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   GoogleMap,
   InfoWindowF,
@@ -17,19 +17,19 @@ const defaultLatLng = {
 
 const containerStyle = {
   width: "100%",
-  height: "400px",
+  height: "100%",
 };
 
-const Map = (props) => {
+const Map = React.memo(function MapMemo(props) {
   const { items, fetchData } = props;
   const [open, setOpen] = useState(Array(items.length).fill(false));
   const [detailVisible, setDetailVisible] = useState(
-    Array(items.length).fill(true)
+    Array(items.length).fill(false)
   );
-  useEffect(() => {
-    setOpen(Array(items.length).fill(false));
-    setDetailVisible(Array(items.length).fill(true));
-  }, [items]);
+  // useEffect(() => {
+  //   setOpen(Array(items.length).fill(false));
+  //   // setDetailVisible(Array(items.length).fill(true));
+  // }, [items]);
   const handleOpen = (index) => {
     const newOpen = [...open];
     newOpen[index] = true;
@@ -82,7 +82,7 @@ const Map = (props) => {
                       <h1 className="pin-text">発見場所</h1>
                       <h2 className="pin-info">{item.place}</h2>
                       <h1 className="pin-text">発見時刻</h1>
-                      <h2 className="pin-info">~ここに日時が入る~</h2>
+                      <h2 className="pin-info">{item.time}</h2>
                       <h1 className="pin-text">詳細</h1>
                       <h2 className="pin-info">{item.detail}</h2>
                       <h2 className="tag-info">
@@ -112,7 +112,8 @@ const Map = (props) => {
       </GoogleMap>
     </LoadScript>
   );
-};
+});
+
 Map.propTypes = {
   items: propTypes.array.isRequired,
   fetchData: propTypes.func.isRequired,

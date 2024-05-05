@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Map from "./Map";
 import "../styles/Top.css";
 import CirclarButton from "@common/components/CirclarButton";
+import DisabledCirclarButton from "@common/components/DisabledCirclarButton";
 import LostFormModal from "./LostFormModal";
 import useSearch from "../hooks/useSearch";
 
@@ -43,20 +44,22 @@ const Top = () => {
           </button>
         </div>
       </div>
-      <div className="columns">
+      <div className="columns" style={{ height: "70vh" }}>
         <div className="column is-10">
           <Map items={lostItemList} fetchData={() => fetchData(keyword)} />
         </div>
         <div className="column is-2 button-container" style={{ margin: "1em" }}>
-          <CirclarButton
-            color="#FFE127"
+          <DisabledCirclarButton
             icon="star"
-            onClick={() => console.log("star")}
+            onClick={() => {
+              window.alert("まだ解放されていないようだ...");
+            }}
           />
-          <CirclarButton
-            color="#7181FF"
+          <DisabledCirclarButton
             icon="question"
-            onClick={() => console.log("question")}
+            onClick={() => {
+              window.alert("まだ解放されていないようだ...");
+            }}
           />
           <CirclarButton
             color="#6FF75B"
