@@ -74,9 +74,9 @@ const Top = () => {
       <div className="search-form-container field has-addons">
         <div className="control is-expanded">
           <input
-            className="input luckiest-guy"
+            className="input"
             type="text"
-            placeholder="SEARCH"
+            placeholder="キーワードを入力してください"
             onChange={(e) => setKeyword(e.target.value)}
           />
         </div>

@@ -1,17 +1,17 @@
-.form-title {
+.lost-form-container {
   font-family: "Yusei Magic", sans-serif;
-  font-size: 30px;
   font-style: normal;
+}
+
+.form-title {
   color: #6c2100;
   text-align: left;
+  font-size: 30px;
 }
 
 .info {
-  background: linear-gradient(transparent 80%, #232d90 0%);
+  background: linear-gradient(transparent 80%, #ff6f6fc5 0%);
   text-align: left;
-  font-family: "Luckiest Guy", cursive;
-  font-weight: 400;
-  font-style: normal;
 }
 
 .delete-button-container {

@@ -29,7 +29,7 @@ const LostForm = (props) => {
   };
   return (
     <>
-      <div className="container">
+      <div className="container lost-form-container">
         <div className="columns">
           <div className="column is-8">
             <h1 className="form-title">落とし物追加フォーム</h1>
@@ -41,8 +41,11 @@ const LostForm = (props) => {
           </div>
         </div>
         <div className="columns">
-          <div className="column is-6">
-            <div className="file center">
+          <div
+            className="column is-6 has-text-centered"
+            style={{ textAlignLast: "center" }}
+          >
+            <div className="file">
               <label className="file-label">
                 <input
                   className="file-input"
@@ -103,6 +106,11 @@ const LostForm = (props) => {
                   type="text"
                 />
               </div>
+            </div>
+            <div>
+              <button className="button" onClick={() => onSubmit(formData)}>
+                送信
+              </button>
             </div>
           </div>
         </div>
