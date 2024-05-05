@@ -21,14 +21,12 @@ const LostForm = (props) => {
       return;
     }
     const reader = new FileReader();
+    reader.readAsDataURL(file);
     reader.onload = () => {
       setPreviewImage(reader.result);
+      setFormData((prev) => ({ ...prev, picture: reader.result }));
     };
-    reader.readAsDataURL(file);
-    setFormData((prev) => ({ ...prev, picture: file }));
-    console.log(formData);
   };
-  // console.log(formData);
   return (
     <>
       <div className="container">
