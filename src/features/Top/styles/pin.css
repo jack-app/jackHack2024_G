@@ -1,0 +1,31 @@
+.pin-text{
+  font-family: "Yusei Magic", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  color: #000000c5;
+  text-align: left;
+  background-color: rgba(255, 36, 7, 0.322);
+}
+
+.pin-info{
+  padding-bottom: 5px;
+  font-family: "Yusei magic", sans-serif;
+  text-align: right;
+  color: black;
+}
+
+.pin-image{
+  border: 3px solid #ff6f6fc5;
+}
+
+.pin-tags{
+	margin: 2px;
+  border: 2px solid rgba(191, 191, 191, 0.322);
+	background-color: rgba(191, 191, 191, 0.322);
+	border-radius: 5px 5px 5px 5px;
+}
+
+.tag-info{
+  font-family: "Yusei magic", sans-serif;
+  color: black;
+}

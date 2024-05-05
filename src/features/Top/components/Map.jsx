@@ -5,6 +5,7 @@ import {
   MarkerF,
 } from "@react-google-maps/api";
 import propTypes from "prop-types";
+import "../styles/pin.css";
 
 // 名古屋大学の緯度、経度
 const defaultLatLng = {
@@ -26,28 +27,30 @@ const Map = (props) => {
         zoom={10}
         mapContainerStyle={containerStyle}
       >
-        {items.map(
-          (item) => (
-            console.log(item),
-            (
-              <MarkerF
-                key={item.id}
-                position={{ lat: item.latitude, lng: item.longitude }}
-              >
-                <InfoWindowF
-                  position={{ lat: item.latitude, lng: item.longitude }}
-                >
-                  <div>hello</div>
-                </InfoWindowF>
-              </MarkerF>
-            )
-          )
-        )}
+        {items.map((item) => (
+          <MarkerF key={item.id} position={{ lat: item.lat, lng: item.lng}}>
+            <InfoWindowF position={{ lat: item.lat, lng: item.lng}}>
+              <div>   
+                <img src = {item.picture} width="200" height="200" alt="落とし物画像" className="pin-image"/>
+                <h1 class = "pin-text">落とし物</h1>
+                <h2 class = "pin-info">{item.name}</h2>
+                <h1 class = "pin-text">発見場所</h1>
+                <h2 class = "pin-info">{item.place}</h2>
+                <h1 class = "pin-text">発見時刻</h1>
+                <h2 class = "pin-info">~ここに日時が入る~</h2>
+                <h1 class = "pin-text">詳細</h1>
+                <h2 class = "pin-info">{item.detail}</h2>
+                <h2 class = "tag-info">{item.tags.map((tag) => (
+                  <span className = "pin-tags">{tag}</span>
+                ))}</h2>
+              </div>
+            </InfoWindowF>
+          </MarkerF>
+        ))}
       </GoogleMap>
     </LoadScript>
   );
 };
-
 Map.propTypes = {
   items: propTypes.array.isRequired,
 };
