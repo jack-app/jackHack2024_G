@@ -1,9 +1,8 @@
-
 from flask import Flask, request, jsonify
 from serchdata import search_mysql  # search_mysql ?��֐�?��?��?��C?��?��?��|?��[?��g?��?��?��?��p?��X?��?��?��m?��F
 from insertdb import save_mysql
 from flask_cors import CORS
-
+from delete_data import delete_data
 from serchdata import search_mysql
 
 app = Flask(__name__)
@@ -41,6 +40,11 @@ def insert():
     detail = data['detail']
     save_mysql(name,latitude,longitude,base64_string,detail)
     
+@app.route('/delete',methos = ['GET'])
+def delete():
+    data = request.get_json()
+    id = data['id']
+    delete_data(id)
 
 if __name__ == "__main__":
     app.run()
