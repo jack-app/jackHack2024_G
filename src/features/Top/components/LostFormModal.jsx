@@ -12,12 +12,11 @@ const LostFormModal = (props) => {
       <div className="modal-background" onClick={() => onClose()}></div>
       <div className="modal-card">
         <section className="modal-card-body">
-          <div className="delete-button-container">
-            <button className="luckiest-guy" onClick={() => onClose()}>
-              x
-            </button>
-          </div>
-          <LostForm onSubmit={onSubmit} loading={loading} />
+          <LostForm
+            onClose={() => onClose()}
+            onSubmit={onSubmit}
+            loading={loading}
+          />
         </section>
       </div>
     </div>
