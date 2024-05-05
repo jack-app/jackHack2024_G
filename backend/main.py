@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from serchdata import search_mysql  # search_mysql �֐����C���|�[�g����p�X���m�F
+from insertdb import save_mysql
 
 
 app = Flask(__name__)
@@ -23,6 +24,16 @@ def search():
         return jsonify(result)  # JSON 形式で結果を返す
     except Exception as e:
         return jsonify({'error': str(e)}), 500  # 予期せぬエラーが発生した場合
+    
+@app.route('/insert',methos = ['GET'])
+def insert():
+    data = request.get_json()
+    name = data['name']
+    latitude = data['latitude']
+    longitude = data['longitude']
+    base64_string = data['base64_string']
+    detail = data['detail']
+    save_mysql(name,latitude,longitude,base64_string,detail)
 
 
 if __name__ == "__main__":
