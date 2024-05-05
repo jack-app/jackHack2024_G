@@ -31,6 +31,9 @@ const Map = (props) => {
           <MarkerF key={item.id} position={{ lat: item.lat, lng: item.lng}}>
             <InfoWindowF position={{ lat: item.lat, lng: item.lng}}>
               <div>
+                <div classname = "pin-img">
+                  <img src = {item.picture} width="70" height="70" alt="落とし物画像"/>
+                </div>
                 <h1 class = "pin-text">落とし物</h1>
                 <h2 class = "pin-info">{item.name}</h2>
                 <h1 class = "pin-text">発見場所</h1>
@@ -48,7 +51,6 @@ const Map = (props) => {
     </LoadScript>
   );
 };
-
 Map.propTypes = {
   items: propTypes.array.isRequired,
 };

@@ -10,7 +10,7 @@ const tmpItemList = [
     id: 1,
     lat: 35.15396053659968,
     lng: 136.96864789075318,
-    picture: "https://japaclip.com/files/long-wallet-bills.png",
+    picture: "https://thumb.photo-ac.com/8d/8d5e3da73936149af0a9620b1a2b6a5a_t.jpeg",
     name: "財布",
     place: "名大図書館前",
     detail: "犬のストラップがついている",
