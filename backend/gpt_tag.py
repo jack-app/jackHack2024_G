@@ -41,13 +41,14 @@ def gpt_tag(base64_string):
     # .envファイルの内容を読み込み
     load_dotenv()
     #ChatGPTを使いタグを生成
-
     # 環境変数からAPIキーを取得
     api_key = os.getenv('CHATGPT_APIKEY')
     # OpenAIクライアントの初期化
     client = OpenAI(api_key=api_key)
 
-    prompt = "この画像に対してタグ付けを行ってください。出力は半角のコンマ区切りで行ったください。ただし空白は入れないでください。"
+    # タグの個数を指定
+    tag_count = 5
+    prompt = f"この画像に対して{tag_count}個タグを付けてください。出力は半角のコンマ区切りで行ったください。ただし空白は入れないでください。"
     messages = [
         {
             "role": "user",
