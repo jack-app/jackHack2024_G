@@ -1,6 +1,6 @@
 import { useState } from "react";
 import propTypes from "prop-types";
-import { MagnifyingGlass } from "react-loader-spinner";
+import { InfinitySpin, MagnifyingGlass } from "react-loader-spinner";
 
 import LostForm from "@features/Form/components/LostForm";
 
@@ -25,8 +25,8 @@ const LostFormModal = (props) => {
         <>
           <div className="loading-over-lay"></div>
           <div className="loading">
-            <MagnifyingGlass />
-            <div style={{ color: "white" }}>落とし物を追加中です...</div>
+            <InfinitySpin color="#ffa2a2" />
+            <div style={{ color: "#ffffff" }}>落とし物を追加中です...</div>
           </div>
         </>
       )}

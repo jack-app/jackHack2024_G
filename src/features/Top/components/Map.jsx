@@ -54,7 +54,7 @@ const Map = React.memo(function MapMemo(props) {
     <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAP_API_KEY}>
       <GoogleMap
         center={defaultLatLng}
-        zoom={12}
+        zoom={14}
         mapContainerStyle={containerStyle}
       >
         {items.map((item, index) => (

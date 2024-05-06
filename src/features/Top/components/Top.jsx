@@ -22,7 +22,7 @@ const Top = () => {
   return (
     <>
       <div>
-        <h1 className="heading luckiest-guy">LOST & FOUND</h1>
+        <h1 className="heading luckiest-guy">Lost Navi</h1>
       </div>
       <div className="search-form-container field has-addons">
         <div className="control is-expanded">

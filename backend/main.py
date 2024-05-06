@@ -6,6 +6,7 @@ from flask_cors import CORS
 from serchdata import search_mysql
 from insertdb import save_mysql
 from delete_data import delete_data
+from increment_like_count import increment_like_count
 
 
 app = Flask(__name__)
@@ -55,6 +56,22 @@ def insert():
         return jsonify({'status': 'success'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500  # 予期せぬエラーが発生した場合
+    
+@app.route('/like_count',methods = ['GET', 'POST'])
+def like_count():
+    data = request.get_json()
+    id = data['id']
+    try:
+        increment_like_count(id)
+        return jsonify({'status': 'success'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500  # 予期せぬエラーが発生した場合
+
+
+
+
+
+
 
 if __name__ == "__main__":
     app.run()

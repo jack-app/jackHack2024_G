@@ -28,7 +28,7 @@ def search_mysql(keyword):
             print("MySQLサーバーに接続しました:", db_info)
 
             query = """
-            SELECT id, name, latitude, longitude, place, time, detail, tags, photo_path
+            SELECT id, name, latitude, longitude, place, time, detail, tags, photo_path, like_count
             FROM lost_item
             WHERE name LIKE %s OR place LIKE %s OR detail LIKE %s OR tags LIKE %s
             """
@@ -36,7 +36,7 @@ def search_mysql(keyword):
             cursor = connection.cursor()
             cursor.execute(query, [keyword_pattern] * 4)  # パラメータをリストで渡す
             result = cursor.fetchall()
-            columns = ['id', 'name', 'latitude', 'longitude', 'place', 'time', 'detail', 'tags', 'photo_path']
+            columns = ['id', 'name', 'latitude', 'longitude', 'place', 'time', 'detail', 'tags', 'photo_path', 'like_count']
             df = pd.DataFrame(result, columns=columns)
 
             # photo_pathのBase64エンコーディング

@@ -51,10 +51,10 @@ def save_mysql(lost_item_name, latitude, longitude, base64_string, detail, place
 
             # SQL INSERT文
             insert_query = """
-            INSERT INTO lost_item (id, name, latitude, longitude, time, photo_path, detail, place, tags)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO lost_item (id, name, latitude, longitude, time, photo_path, detail, place, tags, like_count)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """
-            data = (id, lost_item_name, latitude, longitude, time, photo_path, detail, place, tags)
+            data = (id, lost_item_name, latitude, longitude, time, photo_path, detail, place, tags, 0)
 
             # クエリの実行
             cursor.execute(insert_query, data)
